@@ -1,5 +1,4 @@
 import React from "react";
-import myPhoto from "../assets/my-clg.png";
 
 function Footer() {
     const currentYear = new Date().getFullYear();

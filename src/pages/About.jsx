@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import profileImgNormal from "../assets/aditya-profile.png";
-import profileImgHover from "../assets/aditya-profile-back.png";
 import Footer from "../Components/Footer";
 
 function About() {

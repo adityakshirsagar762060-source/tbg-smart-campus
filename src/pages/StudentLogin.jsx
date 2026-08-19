@@ -13,8 +13,6 @@ import {
   Sparkles,
   BookOpen,
 } from "lucide-react";
-import huskyNormal from "../assets/husky-normal.png";
-import huskyCover from "../assets/husky-cover.png";
 
 const EASE = [0.16, 1, 0.3, 1];
 

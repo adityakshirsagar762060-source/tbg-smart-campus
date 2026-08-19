@@ -1,6 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import collegeLogo from "../assets/college-logo.png";
-import collegeBanner from "../assets/college-banner.png";
 
 const CONTENT = {
     projectName: "Smart Student Campus Dashboard",
@@ -135,7 +133,7 @@ const CollegeDetails = () => {
                 <div className="scd-content">
                     <div style={{ marginBottom: "2rem", display: "flex", justifyContent: "flex-start" }}>
                         <img
-                            src={collegeLogo}
+                            src="/college-logo.png"
                             alt="College Logo"
                             style={{
                                 width: "120px",
@@ -200,7 +198,7 @@ const CollegeDetails = () => {
 
                 <div className="scd-photo-zone" aria-hidden="true" style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem" }}>
                     <img
-                        src={collegeBanner}
+                        src="/college-banner.png"
                         alt="T.B.G. Polytechnic Campus"
                         style={{
                             width: "100%",

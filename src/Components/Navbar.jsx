@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, AlertCircle } from "lucide-react";
-import myPhoto from "../assets/my-clg.png";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -109,7 +108,8 @@ function Navbar() {
           className="cursor-pointer select-none group flex items-center gap-3"
         >
           <div className="flex h-12 w-12 items-center justify-center bg-transparent shrink-0">
-            <img src={myPhoto} alt="Logo" className="h-full w-full object-contain scale-[1.2] transition-transform duration-500 group-hover:scale-[1.3]" />
+            {/* Direct public folder path used safely here */}
+            <img src="/my-clg.png" alt="Logo" className="h-full w-full object-contain scale-[1.2] transition-transform duration-500 group-hover:scale-[1.3]" />
           </div>
           <div className="flex flex-col justify-center">
             <h1 className="bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-xl font-black tracking-[0.15em] text-transparent drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]">
@@ -148,7 +148,6 @@ function Navbar() {
         {/* Right Side Action Buttons */}
         <div className="hidden md:flex items-center gap-5">
 
-          {/* Raise Complaint - Premium Seamless Link (No Box) */}
           <button
             onClick={() => {
               setMenuOpen(false);
@@ -163,7 +162,6 @@ function Navbar() {
             </span>
           </button>
 
-          {/* Student Login / Logout - Ghost to Glow Button */}
           <button
             onClick={handleAuthAction}
             className={`relative px-6 py-2.5 text-[13px] font-bold rounded-full overflow-hidden transition-all duration-300 group hover:-translate-y-[1px] active:translate-y-[1px] ${isLoggedIn && !isHomePage
@@ -208,7 +206,6 @@ function Navbar() {
 
           <div className="h-[1px] w-full bg-white/5 my-3" />
 
-          {/* Mobile Raise Complaint */}
           <button
             onClick={() => {
               setMenuOpen(false);
@@ -220,7 +217,6 @@ function Navbar() {
             Raise Complaint
           </button>
 
-          {/* Mobile Auth Button */}
           <button
             onClick={handleAuthAction}
             className={`w-full rounded-xl px-5 py-3 mt-2 text-sm font-bold tracking-wide transition-all duration-300 ${isLoggedIn && !isHomePage
