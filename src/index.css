@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/* ============================================================
+   GLOBAL DESIGN TOKENS
+   One shared palette for the whole app. Every page pulls its
+   accent from here instead of inventing its own one-off hex.
+   ============================================================ */
+:root {
+  --bg-deep: #030712;
+  --bg-raised: #0b1224;
+
+  --cyan: #22d3ee;
+  --indigo: #6366f1;
+  --violet: #8b5cf6;
+  --amber: #fbbf24;
+  --emerald: #34d399;
+
+  --text: #f3f6fb;
+  --text-secondary: #b8c5d1;
+  --text-muted: #6b7d8e;
+
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-hi: rgba(255, 255, 255, 0.09);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-hi: rgba(255, 255, 255, 0.22);
+
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --fast: 220ms;
+  --mid: 420ms;
+  --slow: 650ms;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-deep);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-height: 100dvh;
+  }
+}
+
+/* ============================================================
+   SCROLL REVEAL (global utility — used across every page)
+   Subtle, fast, fires once via IntersectionObserver in JS.
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   STABILITY / ANTI-FLICKER
+   ============================================================ */
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

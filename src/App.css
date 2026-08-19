@@ -1,0 +1,696 @@
+/* ==========================================================================
+   T.B.G. POLYTECHNIC — SMART CAMPUS
+   Unified App Stylesheet
+   Tokens live in index.css (:root). This file organizes everything that
+   sits on top of them: shared glass/card system, navbar, and one section
+   per page. No page-specific CSS files — this is the single source.
+   ========================================================================== */
+
+/* Anti-Flicker & Smooth Rendering Fixes for Route Swaps */
+html {
+  scroll-behavior: smooth;
+}
+html, body {
+  background-color: #020817;
+  color: #ffffff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Fix for white flash / flickering on page transitions */
+#root {
+  min-height: 100vh;
+  background-color: #020817;
+  isolation: isolate;
+}
+
+/* ==========================================================================
+   GLASS SYSTEM (shared)
+   One definition of "glass" used everywhere — Navbar, cards, panels,
+   the login card. Keep it restrained: soft blur, thin border, quiet shadow.
+   ========================================================================== */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  will-change: transform;
+  transition: transform var(--fast) var(--ease),
+    border-color var(--fast) var(--ease),
+    background var(--fast) var(--ease),
+    box-shadow var(--fast) var(--ease);
+}
+
+.glass:hover {
+  background: var(--glass-hi);
+  border-color: var(--border-hi);
+}
+
+/* Ambient background used by every full page: one slow radial glow,
+   never mouse-tracked, never flashing. */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 10%, rgba(34, 211, 238, 0.1), transparent 45%),
+    radial-gradient(circle at 85% 0%, rgba(99, 102, 241, 0.1), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(139, 92, 246, 0.08), transparent 50%);
+}
+
+/* ==========================================================================
+   SHARED CARD SYSTEM
+   ========================================================================== */
+.card {
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55);
+}
+
+/* Shine sweep — used sparingly, only on primary CTAs and hero cards */
+.shine-wrap {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.shine-wrap .shine {
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+  transform: skewX(-18deg);
+  transition: left var(--mid) var(--ease);
+  pointer-events: none;
+}
+.shine-wrap:hover .shine {
+  left: 130%;
+}
+
+/* Buttons */
+.btn {
+  --accent: var(--cyan);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  will-change: transform;
+  transition: transform var(--fast) var(--ease), border-color var(--fast) var(--ease),
+    background var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+}
+.btn:hover {
+  transform: translateY(-2px);
+  background: var(--glass-hi);
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+  box-shadow: 0 14px 32px -14px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn-cyan { --accent: var(--cyan); }
+.btn-violet { --accent: var(--violet); }
+.btn-amber { --accent: var(--amber); }
+.btn-emerald { --accent: var(--emerald); }
+
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
+.navbar-shell {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 16px;
+}
+.navbar-shell .navbar-inner {
+  border-radius: 999px;
+}
+
+/* ==========================================================================
+   HOME
+   ========================================================================== */
+.home-title {
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  background: linear-gradient(90deg, #ffffff 10%, #bff4ff 55%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ==========================================================================
+   DASHBOARD
+   Per-year accent kept distinct on purpose (identity), driven by CSS vars
+   so hover/active states stay in one place.
+   ========================================================================== */
+.year-card {
+  --dot: var(--cyan);
+}
+.year-card .dot {
+  background: var(--dot);
+}
+.year-card:hover,
+.year-card.active {
+  border-color: color-mix(in srgb, var(--dot) 70%, var(--border));
+  box-shadow: 0 0 32px -14px color-mix(in srgb, var(--dot) 60%, transparent);
+}
+
+/* ==========================================================================
+   LIBRARY
+   ========================================================================== */
+.library-card {
+  border-radius: var(--radius-md);
+}
+.library-card:hover {
+  border-color: color-mix(in srgb, var(--cyan) 55%, var(--border));
+}
+
+/* ==========================================================================
+   ABOUT
+   ========================================================================== */
+.about-avatar {
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+}
+
+/* ==========================================================================
+   COLLEGE DETAILS
+   Folded in from the former CollegeDetails.css — same visual language,
+   scd-* namespace kept so the component markup didn't need to change.
+   Trimmed: fewer/softer orbs, shorter letter-stagger on the wordmark.
+   ========================================================================== */
+.scd-section {
+  --scd-bg: var(--bg-deep);
+  --scd-bg-raised: var(--bg-raised);
+  --scd-glass: var(--glass);
+  --scd-glass-hi: var(--glass-hi);
+  --scd-border: var(--border);
+  --scd-border-hi: var(--border-hi);
+  --scd-text: var(--text);
+  --scd-text-sec: var(--text-secondary);
+  --scd-text-muted: var(--text-muted);
+  --scd-emerald: var(--emerald);
+  --scd-orchid: var(--violet);
+  --scd-gold: var(--amber);
+  --scd-r: 26px;
+  --scd-rm: 16px;
+  --scd-rs: 12px;
+
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--scd-bg);
+  color: var(--scd-text);
+  padding: 100px 6vw 110px;
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  box-sizing: border-box;
+}
+
+.scd-section *,
+.scd-section *::before,
+.scd-section *::after {
+  box-sizing: border-box;
+}
+
+.scd-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.scd-bg__canvas {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, var(--scd-bg-raised) 0%, var(--scd-bg) 60%);
+}
+
+.scd-bg__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  will-change: transform;
+}
+
+.scd-bg__orb--a {
+  width: 620px;
+  height: 620px;
+  top: -20%;
+  left: -15%;
+  background: radial-gradient(circle, rgba(124, 255, 178, 0.1), transparent 68%);
+  animation: orb-a 34s var(--ease) infinite;
+}
+
+.scd-bg__orb--b {
+  width: 520px;
+  height: 520px;
+  bottom: -20%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent 68%);
+  animation: orb-b 40s var(--ease) infinite;
+}
+
+.scd-bg__orb--c {
+  width: 380px;
+  height: 380px;
+  top: 35%;
+  left: 38%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.06), transparent 68%);
+  animation: orb-c 28s var(--ease) infinite;
+}
+
+@keyframes orb-a { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(26px, 18px); } }
+@keyframes orb-b { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-20px, -14px); } }
+@keyframes orb-c { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(14px, -10px) scale(1.08); } }
+
+.scd-bg__glass {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 7, 18, 0.5);
+  backdrop-filter: blur(50px) saturate(1.1);
+  -webkit-backdrop-filter: blur(50px) saturate(1.1);
+}
+
+.scd-bg__glass-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(130deg, rgba(255, 255, 255, 0.05) 0%, transparent 28%, transparent 70%, rgba(255, 255, 255, 0.03) 100%);
+}
+
+.scd-bg__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 88% 68% at 50% 38%, transparent 52%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+.scd-brand {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 56px;
+}
+
+.scd-brand__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--scd-glass);
+  border: 1px solid var(--scd-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--scd-emerald);
+}
+
+.scd-brand__name {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--scd-text-muted);
+}
+
+.scd-container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 64px;
+  align-items: center;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.scd-photo-zone {
+  min-height: 480px;
+}
+
+.scd-wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 32px;
+}
+
+.wm-initials {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.wm-letter {
+  display: inline-block;
+  font-size: clamp(34px, 4.6vw, 54px);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, var(--scd-emerald) calc(var(--i) * 0%), var(--scd-orchid), var(--scd-gold));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  transition-delay: calc(var(--i) * 55ms);
+}
+
+.wm-letter:nth-child(even) {
+  font-size: clamp(18px, 2.6vw, 30px);
+  font-weight: 600;
+}
+
+.wm-active .wm-letter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wm-poly {
+  display: flex;
+  gap: 1px;
+  overflow: hidden;
+}
+
+.wm-poly-letter {
+  display: inline-block;
+  font-size: clamp(11px, 1.3vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--scd-text);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  transition-delay: calc(320ms + var(--i) * 22ms);
+}
+
+.wm-active .wm-poly-letter {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.wm-place {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  color: var(--scd-text-muted);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.45s var(--ease) 560ms, transform 0.45s var(--ease) 560ms;
+}
+
+.wm-active .wm-place {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wm-line {
+  width: 0;
+  height: 1px;
+  margin: 14px 0 12px;
+  background: linear-gradient(90deg, var(--scd-emerald), var(--scd-orchid), var(--scd-gold));
+  transition: width 0.6s var(--ease) 620ms;
+}
+
+.wm-active .wm-line {
+  width: 180px;
+}
+
+.wm-sub {
+  margin: 0;
+  font-size: 12px;
+  color: var(--scd-text-muted);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.45s var(--ease) 740ms, transform 0.45s var(--ease) 740ms;
+}
+
+.wm-active .wm-sub {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scd-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease);
+}
+.scd-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scd-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.scd-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--scd-text-muted);
+}
+.scd-eyebrow::before {
+  content: "";
+  width: 20px;
+  height: 1px;
+  background: var(--scd-border-hi);
+}
+
+.scd-title {
+  margin: 0;
+  font-size: clamp(26px, 2.8vw, 40px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+}
+.scd-title__loc {
+  font-weight: 300;
+  color: var(--scd-text-sec);
+}
+
+.scd-about {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--scd-text-sec);
+}
+
+.scd-pillars {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.scd-pillar {
+  border-radius: var(--scd-rm);
+  background: var(--scd-glass);
+  border: 1px solid var(--scd-border);
+  padding: 18px 20px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: transform var(--fast) var(--ease), border-color var(--fast) var(--ease);
+}
+.scd-pillar:hover {
+  transform: translateY(-3px);
+  border-color: var(--scd-border-hi);
+}
+
+.scd-pillar__tag {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--scd-emerald);
+}
+.scd-pillar:nth-child(2) .scd-pillar__tag {
+  color: var(--scd-orchid);
+}
+
+.scd-pillar__text {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--scd-text-sec);
+}
+
+.scd-chips-label {
+  margin: 6px 0 0;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--scd-text-muted);
+}
+
+.scd-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.scd-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--scd-text);
+  background: var(--scd-glass);
+  border: 1px solid var(--scd-border);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), border-color var(--fast) var(--ease);
+  transition-delay: calc(var(--ci) * 28ms);
+}
+.scd-chips.is-visible .scd-chip {
+  opacity: 1;
+  transform: scale(1);
+}
+.scd-chip:hover {
+  border-color: var(--scd-border-hi);
+}
+
+.scd-chip__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--scd-emerald);
+  flex-shrink: 0;
+}
+.scd-chip:nth-child(3n+2) .scd-chip__dot { background: var(--scd-orchid); }
+.scd-chip:nth-child(3n+3) .scd-chip__dot { background: var(--scd-gold); }
+
+.scd-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.scd-btn {
+  --accent: var(--scd-emerald);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 24px;
+  border-radius: var(--scd-rs);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--scd-text);
+  background: var(--scd-glass);
+  border: 1px solid var(--scd-border);
+  cursor: pointer;
+  transition: transform var(--fast) var(--ease), border-color var(--fast) var(--ease), background var(--fast) var(--ease);
+}
+.scd-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.scd-btn__icon {
+  display: inline-flex;
+  color: var(--accent);
+}
+.scd-btn:hover {
+  transform: translateY(-2px);
+  background: var(--scd-glass-hi);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--scd-border));
+}
+.scd-btn--emerald { --accent: var(--scd-emerald); }
+.scd-btn--orchid { --accent: var(--scd-orchid); }
+.scd-btn--gold { --accent: var(--scd-gold); }
+
+@media (max-width: 1280px) {
+  .scd-container { grid-template-columns: 1fr 360px; gap: 48px; }
+}
+@media (max-width: 1024px) {
+  .scd-section { padding: 80px 5vw; }
+  .scd-container { grid-template-columns: 1fr; gap: 44px; max-width: 680px; }
+  .scd-photo-zone { min-height: 300px; }
+}
+@media (max-width: 768px) {
+  .scd-pillars { grid-template-columns: 1fr; }
+  .scd-photo-zone { min-height: 240px; }
+}
+@media (max-width: 640px) {
+  .scd-section { padding: 68px 5.5vw 80px; }
+  .scd-actions { flex-direction: column; align-items: stretch; }
+  .scd-btn { justify-content: center; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scd-reveal, .wm-letter, .wm-poly-letter, .wm-place, .wm-line, .wm-sub, .scd-chip, .scd-bg__orb {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   PLACEMENT
+   Placeholder shell only — populate with real data when provided.
+   ========================================================================== */
+.placement-empty {
+  border-radius: var(--radius-md);
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   STUDENT LOGIN
+   ========================================================================== */
+.login-card {
+  border-radius: var(--radius-lg);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .card { padding: 20px; }
+}
+@media (max-width: 640px) {
+  .navbar-shell { padding: 12px; }
+  .card { padding: 18px; }
+}

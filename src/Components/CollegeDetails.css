@@ -1,0 +1,651 @@
+/* ============================================================================
+   SMART STUDENT CAMPUS DASHBOARD — College Details
+   Luxury Glassmorphism UI  |  No Tailwind / Bootstrap
+   ============================================================================ */
+
+/* ── Design Tokens ────────────────────────────────────────────────────────── */
+.scd-section {
+  --scd-bg:           #050b14;
+  --scd-bg-raised:    #09111f;
+  --scd-glass:        rgba(255,255,255,0.06);
+  --scd-glass-hi:     rgba(255,255,255,0.10);
+  --scd-border:       rgba(255,255,255,0.12);
+  --scd-border-hi:    rgba(255,255,255,0.22);
+  --scd-text:         #f0f4fa;
+  --scd-text-sec:     #b8c5d1;
+  --scd-text-muted:   #6b7d8e;
+  --scd-emerald:      #7cffb2;
+  --scd-orchid:       #c8a2ff;
+  --scd-gold:         #f6c453;
+  --scd-rose:         #ff7eb3;
+  --scd-r:            26px;
+  --scd-rm:           16px;
+  --scd-rs:           12px;
+  --ease:             cubic-bezier(.22,1,.36,1);
+  --fast:             260ms;
+  --mid:              500ms;
+  --slow:             760ms;
+
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--scd-bg);
+  color: var(--scd-text);
+  padding: 100px 6vw 110px;
+  font-family: "Inter","Segoe UI",-apple-system,BlinkMacSystemFont,sans-serif;
+  box-sizing: border-box;
+}
+
+.scd-section *, .scd-section *::before, .scd-section *::after {
+  box-sizing: border-box;
+}
+
+/* ============================================================================
+   BACKGROUND — two-layer glassmorphism
+   Layer 1 (.scd-bg__canvas)  → replaceable animation target (now: soft orbs)
+   Layer 2 (.scd-bg__glass)   → real frosted-glass pane over the canvas
+   Replace canvas contents with Three.js / Spline / Lottie / <video> freely.
+   ============================================================================ */
+
+.scd-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* ── Canvas layer — swap THIS for your animation ── */
+.scd-bg__canvas {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, var(--scd-bg-raised) 0%, var(--scd-bg) 60%);
+}
+
+.scd-bg__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  will-change: transform;
+}
+
+.scd-bg__orb--a {
+  width: 700px; height: 700px;
+  top: -20%; left: -15%;
+  background: radial-gradient(circle, rgba(124,255,178,0.14), transparent 68%);
+  animation: orb-a 28s var(--ease) infinite;
+}
+
+.scd-bg__orb--b {
+  width: 580px; height: 580px;
+  bottom: -20%; right: -10%;
+  background: radial-gradient(circle, rgba(200,162,255,0.12), transparent 68%);
+  animation: orb-b 36s var(--ease) infinite;
+}
+
+.scd-bg__orb--c {
+  width: 420px; height: 420px;
+  top: 35%; left: 38%;
+  background: radial-gradient(circle, rgba(246,196,83,0.08), transparent 68%);
+  animation: orb-c 22s var(--ease) infinite;
+}
+
+@keyframes orb-a { 0%,100%{transform:translate(0,0)}  50%{transform:translate(30px,22px)} }
+@keyframes orb-b { 0%,100%{transform:translate(0,0)}  50%{transform:translate(-24px,-18px)} }
+@keyframes orb-c { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(16px,-14px) scale(1.1)} }
+
+/* ── Frosted glass pane — sits over the canvas, makes bg feel like glass ── */
+.scd-bg__glass {
+  position: absolute;
+  inset: 0;
+  background: rgba(5,11,20,0.52);
+  backdrop-filter: blur(55px) saturate(1.1);
+  -webkit-backdrop-filter: blur(55px) saturate(1.1);
+}
+
+.scd-bg__glass-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    130deg,
+    rgba(255,255,255,0.055) 0%,
+    transparent 28%,
+    transparent 70%,
+    rgba(255,255,255,0.03) 100%
+  );
+}
+
+.scd-bg__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 88% 68% at 50% 38%, transparent 52%, rgba(0,0,0,0.48) 100%);
+}
+
+/* ============================================================================
+   BRAND MARK
+   ============================================================================ */
+
+.scd-brand {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 64px;
+}
+
+.scd-brand__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 9px;
+  background: var(--scd-glass);
+  border: 1px solid var(--scd-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--scd-emerald);
+}
+
+.scd-brand__name {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--scd-text-muted);
+}
+
+/* ============================================================================
+   LAYOUT
+   ============================================================================ */
+
+.scd-container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 72px;
+  align-items: center;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* ── RIGHT: empty photo zone — completely blank, no styling visible ── */
+.scd-photo-zone {
+  /* Nothing here intentionally.
+     Add your own image, Three.js canvas, video, or Spline scene
+     directly into this div in the JSX. */
+  min-height: 500px;
+}
+
+/* ============================================================================
+   ANIMATED WORDMARK  (T.B.G. · POLYTECHNIC · AMBAJOGAI)
+   Each letter animates independently via CSS + stagger --i variable.
+   ============================================================================ */
+
+.scd-wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 36px;
+}
+
+/* Initials — each letter slides + fades in with a stagger */
+.wm-initials {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.wm-letter {
+  display: inline-block;
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 800;
+  letter-spacing: .02em;
+  /* Gradient per letter cycling through emerald → orchid → gold */
+  background: linear-gradient(
+    135deg,
+    var(--scd-emerald) calc(var(--i) * 0%),
+    var(--scd-orchid),
+    var(--scd-gold)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Start hidden */
+  opacity: 0;
+  transform: translateY(30px) skewX(-6deg);
+  transition: opacity .55s var(--ease), transform .55s var(--ease);
+  transition-delay: calc(var(--i) * 65ms);
+}
+
+/* "T" → emerald, "." → muted, "B" → orchid, "G" → gold individually */
+.wm-letter:nth-child(1) { --letter-color: var(--scd-emerald); }
+.wm-letter:nth-child(2) { --letter-color: var(--scd-text-muted); font-size: .55em; opacity:0; }
+.wm-letter:nth-child(3) { --letter-color: var(--scd-orchid); }
+.wm-letter:nth-child(4) { --letter-color: var(--scd-text-muted); font-size: .55em; }
+.wm-letter:nth-child(5) { --letter-color: var(--scd-gold); }
+.wm-letter:nth-child(6) { --letter-color: var(--scd-text-muted); font-size: .55em; }
+
+.wm-active .wm-letter {
+  opacity: 1;
+  transform: translateY(0) skewX(0deg);
+}
+
+/* Dots inside "T.B.G." scale down */
+.wm-letter:nth-child(even) {
+  font-size: clamp(20px, 2.8vw, 34px);
+  font-weight: 600;
+}
+
+/* POLYTECHNIC */
+.wm-poly {
+  display: flex;
+  gap: 1px;
+  overflow: hidden;
+}
+
+.wm-poly-letter {
+  display: inline-block;
+  font-size: clamp(12px, 1.4vw, 16px);
+  font-weight: 600;
+  letter-spacing: .3em;
+  color: var(--scd-text);
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity .45s var(--ease), transform .45s var(--ease);
+  transition-delay: calc(380ms + var(--i) * 30ms);
+}
+
+.wm-active .wm-poly-letter {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* AMBAJOGAI */
+.wm-place {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .3em;
+  color: var(--scd-text-muted);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .5s var(--ease) 680ms, transform .5s var(--ease) 680ms;
+}
+
+.wm-active .wm-place {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Divider line — grows from left */
+.wm-line {
+  width: 0;
+  height: 1px;
+  margin: 16px 0 14px;
+  background: linear-gradient(90deg, var(--scd-emerald), var(--scd-orchid), var(--scd-gold));
+  transition: width .7s var(--ease) 750ms;
+}
+
+.wm-active .wm-line {
+  width: 200px;
+}
+
+/* Subtitle */
+.wm-sub {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: .02em;
+  color: var(--scd-text-muted);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .5s var(--ease) 900ms, transform .5s var(--ease) 900ms;
+}
+
+.wm-active .wm-sub {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================================
+   SCROLL REVEAL — staggered via transition-delay set inline
+   ============================================================================ */
+
+.scd-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease);
+}
+
+.scd-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================================
+   CONTENT — LEFT SIDE
+   ============================================================================ */
+
+.scd-content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.scd-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--scd-text-muted);
+}
+
+.scd-eyebrow::before {
+  content: "";
+  width: 20px; height: 1px;
+  background: var(--scd-border-hi);
+}
+
+/* ── Title ── */
+.scd-title {
+  margin: 0;
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -.015em;
+}
+
+.scd-title__loc {
+  font-weight: 300;
+  color: var(--scd-text-sec);
+}
+
+/* ── About ── */
+.scd-about {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--scd-text-sec);
+}
+
+/* ── Mission / Vision glass cards ── */
+.scd-pillars {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.scd-pillar {
+  border-radius: var(--scd-rm);
+  background: var(--scd-glass);
+  border: 1px solid var(--scd-border);
+  padding: 20px 22px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+  transition: transform var(--fast) var(--ease),
+              border-color var(--fast) var(--ease),
+              background var(--fast) var(--ease),
+              box-shadow var(--fast) var(--ease);
+}
+
+.scd-pillar:hover {
+  transform: translateY(-4px);
+  border-color: var(--scd-border-hi);
+  background: var(--scd-glass-hi);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.scd-pillar__tag {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--scd-emerald);
+}
+
+.scd-pillar:nth-child(2) .scd-pillar__tag {
+  color: var(--scd-orchid);
+}
+
+.scd-pillar__text {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--scd-text-sec);
+}
+
+/* ── Highlights ── */
+.scd-chips-label {
+  margin: 8px 0 0;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--scd-text-muted);
+}
+
+.scd-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.scd-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--scd-text);
+  background: var(--scd-glass);
+  border: 1px solid var(--scd-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* Stagger animation on reveal */
+  opacity: 0;
+  transform: scale(.88);
+  transition: opacity .4s var(--ease), transform .4s var(--ease),
+              border-color var(--fast) var(--ease), background var(--fast) var(--ease);
+  transition-delay: calc(var(--ci) * 35ms);
+}
+
+.scd-chips.is-visible .scd-chip {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scd-chip:hover {
+  transform: translateY(-2px) scale(1.02);
+  border-color: var(--scd-border-hi);
+  background: var(--scd-glass-hi);
+}
+
+.scd-chip__dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--scd-emerald);
+  flex-shrink: 0;
+}
+
+/* Alternate dot colors across the chip list */
+.scd-chip:nth-child(3n+2) .scd-chip__dot { background: var(--scd-orchid); }
+.scd-chip:nth-child(3n+3) .scd-chip__dot { background: var(--scd-gold); }
+
+/* ============================================================================
+   BUTTONS
+   ============================================================================ */
+
+.scd-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.scd-btn {
+  --accent: var(--scd-emerald);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 24px;
+  border-radius: var(--scd-rs);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-decoration: none;
+  color: var(--scd-text);
+  background: var(--scd-glass);
+  border: 1px solid var(--scd-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform var(--fast) var(--ease),
+              border-color var(--fast) var(--ease),
+              background var(--fast) var(--ease),
+              box-shadow var(--fast) var(--ease);
+}
+
+.scd-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.scd-btn__icon {
+  display: inline-flex;
+  color: var(--accent);
+  transition: transform var(--fast) var(--ease);
+}
+
+/* Glass shine sweep on hover */
+.scd-btn::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -55%;
+  width: 36%; height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,0.18), transparent);
+  transform: skewX(-18deg);
+  transition: left var(--mid) var(--ease);
+  pointer-events: none;
+}
+
+.scd-btn:hover::before { left: 128%; }
+
+.scd-btn:hover {
+  transform: translateY(-3px);
+  background: var(--scd-glass-hi);
+  border-color: color-mix(in srgb, var(--accent) 48%, var(--scd-border));
+  box-shadow: 0 14px 36px -12px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+.scd-btn:hover .scd-btn__icon { transform: scale(1.1) rotate(-4deg); }
+.scd-btn:active { transform: translateY(-1px); }
+
+.scd-btn--emerald { --accent: var(--scd-emerald); }
+.scd-btn--orchid  { --accent: var(--scd-orchid);  }
+.scd-btn--gold    { --accent: var(--scd-gold);     }
+
+/* ============================================================================
+   REDUCED MOTION
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .scd-reveal, .wm-letter, .wm-poly-letter, .wm-place, .wm-line, .wm-sub,
+  .scd-chip, .scd-btn, .scd-pillar, .scd-bg__orb {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    width: 200px !important; /* for wm-line */
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+/* Large desktop */
+@media (min-width: 1441px) {
+  .scd-container {
+    grid-template-columns: 1fr 480px;
+    gap: 88px;
+  }
+}
+
+/* Laptop / small desktop */
+@media (max-width: 1280px) {
+  .scd-container {
+    grid-template-columns: 1fr 380px;
+    gap: 56px;
+  }
+}
+
+/* Tablet — single column, photo zone below content */
+@media (max-width: 1024px) {
+  .scd-section { padding: 80px 5vw; }
+
+  .scd-container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    max-width: 680px;
+  }
+
+  .scd-photo-zone {
+    min-height: 320px;
+  }
+}
+
+/* Phablet */
+@media (max-width: 768px) {
+  .scd-pillars { grid-template-columns: 1fr; }
+  .scd-photo-zone { min-height: 260px; }
+  .wm-line.wm-active { width: 160px !important; }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .scd-section { padding: 68px 5.5vw 80px; }
+  .scd-brand   { margin-bottom: 44px; }
+
+  .scd-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .scd-btn { justify-content: center; width: 100%; }
+  .scd-photo-zone { min-height: 200px; }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
+  .scd-section { padding: 56px 5vw 64px; }
+  .scd-brand__name { font-size: 10px; letter-spacing: .1em; }
+  .scd-chip { font-size: 11.5px; padding: 7px 13px; }
+}
+
+/* Fold devices */
+@media (max-width: 320px) {
+  .scd-section { padding: 48px 4.5vw 56px; }
+  .scd-title { font-size: 24px; }
+}

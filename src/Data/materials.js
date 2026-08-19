@@ -1,0 +1,23 @@
+export const studyMaterials = {
+  '311301': { url: 'https://msbte.org.in/portal/search/?q=311301', title: 'English' },
+  '311302': { url: 'https://msbte.org.in/portal/search/?q=311302', title: 'Basic Science' },
+  '311303': { url: 'https://msbte.org.in/portal/search/?q=311303', title: 'Basic Math' },
+  '312301': { url: 'https://msbte.org.in/portal/search/?q=312301', title: 'Applied Math' },
+  '312302': { url: 'https://msbte.org.in/portal/search/?q=312302', title: 'Engg. Graphics' },
+  '312303': { url: 'https://msbte.org.in/portal/search/?q=312303', title: 'Workshop' },
+  '313301': { url: 'https://msbte.org.in/portal/search/?q=313301', title: 'Data Structures' },
+  '313302': { url: 'https://msbte.org.in/portal/search/?q=313302', title: 'CAM' },
+  '313303': { url: 'https://msbte.org.in/portal/search/?q=313303', title: 'Java' },
+  '313304': { url: 'https://msbte.org.in/portal/search/?q=313304', title: 'VB.NET' },
+  '314301': { url: 'https://msbte.org.in/portal/search/?q=314301', title: 'DBMS' },
+  '314302': { url: 'https://msbte.org.in/portal/search/?q=314302', title: 'DCN' },
+  '314303': { url: 'https://msbte.org.in/portal/search/?q=314303', title: 'Python' },
+  '314304': { url: 'https://msbte.org.in/portal/search/?q=314304', title: 'Software Engg.' },
+  '315319': { url: 'https://msbte.org.in/portal/search/?q=315319', title: 'Operating System' },
+  '315321': { url: 'https://msbte.org.in/portal/search/?q=315321', title: 'ACN' },
+  '315323': { url: 'https://msbte.org.in/portal/search/?q=315323', title: 'Software Testing' },
+  '315325': { url: 'https://msbte.org.in/portal/search/?q=315325', title: 'Cloud Computing' },
+  '315326': { url: 'https://msbte.org.in/portal/search/?q=315326', title: 'Data Analytics' },
+  '316301': { url: 'https://msbte.org.in/portal/search/?q=316301', title: 'Management' },
+  '316302': { url: 'https://msbte.org.in/portal/search/?q=316302', title: 'Emerging Trends' }
+};
