@@ -4,6 +4,10 @@ import Footer from "../Components/Footer";
 function About() {
   const [isHovered, setIsHovered] = useState(false);
 
+  // Yahan normal aur hover dono alag-alag photos set kar di gayi hain!
+  const profileImgNormal = "/aditya-profile.png";
+  const profileImgHover = "/aditya-profile-back.png"; // Agar naam thoda alag ho toh yahan change kar lena
+
   return (
     <div className="relative min-h-screen w-full flex flex-col overflow-x-hidden text-white bg-[#050b14]">
       <div className="flex-grow relative z-10 w-full px-6 sm:px-10 pt-28 pb-16 flex flex-col justify-center">

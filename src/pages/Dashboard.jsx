@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { studyMaterials } from "../data/materials";
+import { studyMaterials } from "../Data/materials";
 import SkeletonCard from "../components/SkeletonCard";
 
 
@@ -413,7 +413,6 @@ function Dashboard() {
         </footer>
       </div>
 
-      {/* Premium animation & glass primitives — scoped, no external deps */}
       <style>{`
         .glass-panel {
           backdrop-filter: blur(22px);

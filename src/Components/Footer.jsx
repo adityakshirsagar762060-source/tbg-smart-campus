@@ -3,6 +3,9 @@ import React from "react";
 function Footer() {
     const currentYear = new Date().getFullYear();
 
+    // Public folder se direct image path define kar diya hai taaki koi error na aaye
+    const myPhoto = "/my-clg.png";
+
     return (
         <footer className="w-full border-t border-white/10 bg-[#050b14] pt-12 pb-6 mt-16">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -80,7 +83,7 @@ function Footer() {
                 </div>
 
                 <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-                    <p> {currentYear} T.B. Girwalkar Polytechnic. </p>
+                    <p>© {currentYear} T.B. Girwalkar Polytechnic.</p>
                     <p>Designed & Developed by <span className="text-cyan-400 font-semibold text-sm">Aditya Kshirsagar</span></p>
                 </div>
             </div>
