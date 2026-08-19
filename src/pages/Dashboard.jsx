@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { studyMaterials } from "../Data/materials";
-import SkeletonCard from "../components/SkeletonCard";
-
+import SkeletonCard from "../Components/SkeletonCard";
 
 function Dashboard() {
   const [selectedYear, setSelectedYear] = useState(null);
@@ -97,7 +96,6 @@ function Dashboard() {
     return [];
   };
 
-  // Per-year premium accent glow (kept restrained — no neon, no flashing)
   const yearTheme = {
     "1st Year": {
       ring: "hover:border-cyan-400/70",
@@ -129,7 +127,6 @@ function Dashboard() {
       className={`relative min-h-screen overflow-x-hidden transition-colors duration-700 ${isDark ? "bg-[#05060c] text-white" : "bg-[#eef1f6] text-slate-900"
         }`}
     >
-      {/* Premium ambient background */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div
           className={`absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-[150px] animate-drift-slow ${isDark ? "bg-cyan-500/10" : "bg-cyan-400/20"
@@ -152,7 +149,6 @@ function Dashboard() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-10">
-        {/* NAVBAR / HEADER */}
         <header
           className={`glass-panel sticky top-4 z-20 mb-10 flex flex-col gap-5 rounded-3xl border px-5 py-5 sm:px-8 sm:py-6 lg:flex-row lg:items-center lg:justify-between reveal ${mounted ? "reveal-in" : ""
             } ${isDark
@@ -183,7 +179,6 @@ function Dashboard() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-            {/* Search box */}
             <div className="search-glow group relative w-full sm:w-72">
               <span
                 className={`pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm ${isDark ? "text-gray-500" : "text-slate-400"
@@ -220,7 +215,6 @@ function Dashboard() {
           </div>
         </header>
 
-        {/* WELCOME CARD */}
         <div
           className={`glass-panel glass-shine reveal relative mb-12 overflow-hidden rounded-[28px] border p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1 ${mounted ? "reveal-in" : ""
             } ${isDark
@@ -240,7 +234,6 @@ function Dashboard() {
           </p>
         </div>
 
-        {/* YEAR + SEMESTER SELECTION */}
         {!searchTerm && (
           <div className="mb-14">
             <div className="flex flex-wrap justify-center gap-5 sm:gap-6">
@@ -299,7 +292,6 @@ function Dashboard() {
           </div>
         )}
 
-        {/* RESULTS HEADER */}
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-xl font-bold sm:text-2xl">
             {searchTerm
@@ -318,7 +310,6 @@ function Dashboard() {
           </span>
         </div>
 
-        {/* SUBJECT GRID */}
         {!isLoading && subjects.length === 0 && (searchTerm || (selectedYear && selectedSem)) ? (
           <div
             className={`glass-panel reveal reveal-in mb-8 rounded-3xl border p-10 text-center ${isDark ? "border-white/10 bg-white/[0.04]" : "border-black/5 bg-white/70"
@@ -395,7 +386,6 @@ function Dashboard() {
           </div>
         )}
 
-        {/* FOOTER */}
         <footer
           className={`glass-panel reveal reveal-in mt-16 rounded-3xl border p-6 text-center sm:p-8 ${isDark ? "border-white/10 bg-white/[0.04]" : "border-black/5 bg-white/70"
             }`}
