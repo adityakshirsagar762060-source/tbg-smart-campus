@@ -105,7 +105,7 @@ const RaiseComplaint = () => {
 
     const addFiles = (files) => {
         const validFiles = files.filter((file) => {
-            const maxSize = 5 * 1024 * 1024; // 5MB
+            const maxSize = 5 * 1024 * 1024;
             return file.size <= maxSize;
         });
 
@@ -144,7 +144,6 @@ const RaiseComplaint = () => {
 
         setIsSubmitting(true);
 
-        // Simulate API call
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
         setIsSubmitting(false);
@@ -226,7 +225,6 @@ const RaiseComplaint = () => {
     return (
         <div className="min-h-screen bg-[#050b14] p-6 lg:p-8">
             <style>{`
-        /* Cleaned up select styles to prevent background tiling issues */
         select option {
           background: #0f1825;
           color: white;
@@ -289,7 +287,6 @@ const RaiseComplaint = () => {
       `}</style>
 
             <div className="max-w-7xl mx-auto pt-20">
-                {/* Header */}
                 <div className="mb-12">
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
@@ -304,12 +301,9 @@ const RaiseComplaint = () => {
                     </div>
                 </div>
 
-                {/* Main Grid Layout */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    {/* Form Section - 8 columns */}
                     <div className="lg:col-span-8">
                         <form onSubmit={handleSubmit} className="space-y-6">
-                            {/* Personal Details Section */}
                             <div className="group backdrop-blur-2xl bg-gradient-to-br from-white/8 to-white/3 border border-white/15 rounded-3xl p-8 transition-all duration-500 shadow-xl hover:border-white/30 hover:shadow-[0_0_40px_rgba(34,211,238,0.05)]">
                                 <h2 className="text-xl font-bold text-white mb-8 flex items-center gap-3">
                                     <div className="p-2.5 bg-gradient-to-br from-blue-500/30 to-cyan-600/20 rounded-lg group-hover:from-blue-500/40 group-hover:to-cyan-600/30 transition-all">
@@ -321,7 +315,6 @@ const RaiseComplaint = () => {
                                 </h2>
 
                                 <div className="grid grid-cols-2 gap-6">
-                                    {/* Full Name */}
                                     <div className="col-span-2 sm:col-span-1">
                                         <label className="block text-xs uppercase tracking-wider font-bold text-white/70 mb-2 ml-1">
                                             Full Name
@@ -345,7 +338,6 @@ const RaiseComplaint = () => {
                                         )}
                                     </div>
 
-                                    {/* Enrollment Number */}
                                     <div className="col-span-2 sm:col-span-1">
                                         <label className="block text-xs uppercase tracking-wider font-bold text-white/70 mb-2 ml-1">
                                             Enrollment Number
@@ -371,7 +363,6 @@ const RaiseComplaint = () => {
                                 </div>
                             </div>
 
-                            {/* Complaint Details Section */}
                             <div className="group backdrop-blur-2xl bg-gradient-to-br from-white/8 to-white/3 border border-white/15 rounded-3xl p-8 transition-all duration-500 shadow-xl hover:border-white/30 hover:shadow-[0_0_40px_rgba(168,85,247,0.05)]">
                                 <h2 className="text-xl font-bold text-white mb-8 flex items-center gap-3">
                                     <div className="p-2.5 bg-gradient-to-br from-purple-500/30 to-pink-600/20 rounded-lg group-hover:from-purple-500/40 group-hover:to-pink-600/30 transition-all">
@@ -383,7 +374,6 @@ const RaiseComplaint = () => {
                                 </h2>
 
                                 <div className="space-y-6">
-                                    {/* Department - FIXED REPEATING PATTERN HERE */}
                                     <div>
                                         <label className="block text-xs uppercase tracking-wider font-bold text-white/70 mb-2 ml-1">
                                             Department
@@ -413,7 +403,6 @@ const RaiseComplaint = () => {
                                         )}
                                     </div>
 
-                                    {/* Complaint Category - FIXED REPEATING PATTERN HERE */}
                                     <div>
                                         <label className="block text-xs uppercase tracking-wider font-bold text-white/70 mb-2 ml-1">
                                             Complaint Category
@@ -443,7 +432,6 @@ const RaiseComplaint = () => {
                                         )}
                                     </div>
 
-                                    {/* Priority Level */}
                                     <div>
                                         <label className="block text-xs uppercase tracking-wider font-bold text-white/70 mb-3 ml-1">
                                             Priority Level
@@ -468,7 +456,6 @@ const RaiseComplaint = () => {
                                         </div>
                                     </div>
 
-                                    {/* Subject */}
                                     <div>
                                         <label className="block text-xs uppercase tracking-wider font-bold text-white/70 mb-2 ml-1">
                                             Subject
@@ -492,7 +479,6 @@ const RaiseComplaint = () => {
                                         )}
                                     </div>
 
-                                    {/* Description */}
                                     <div>
                                         <label className="block text-xs uppercase tracking-wider font-bold text-white/70 mb-2 ml-1">
                                             Detailed Description
@@ -518,7 +504,6 @@ const RaiseComplaint = () => {
                                 </div>
                             </div>
 
-                            {/* File Upload Section */}
                             <div className="group backdrop-blur-2xl bg-gradient-to-br from-white/8 to-white/3 border border-white/15 rounded-3xl p-8 transition-all duration-500 shadow-xl hover:border-white/30 hover:shadow-[0_0_40px_rgba(6,182,212,0.05)]">
                                 <h2 className="text-xl font-bold text-white mb-8 flex items-center gap-3">
                                     <div className="p-2.5 bg-gradient-to-br from-cyan-500/30 to-blue-600/20 rounded-lg group-hover:from-cyan-500/40 group-hover:to-blue-600/30 transition-all">
@@ -529,7 +514,6 @@ const RaiseComplaint = () => {
                                     </span>
                                 </h2>
 
-                                {/* Drag and Drop Area */}
                                 <div
                                     ref={dragRef}
                                     onDragOver={handleDragOver}
@@ -562,7 +546,6 @@ const RaiseComplaint = () => {
                                     </div>
                                 </div>
 
-                                {/* Uploaded Files List */}
                                 {uploadedFiles.length > 0 && (
                                     <div className="space-y-4 p-5 rounded-2xl bg-gradient-to-br from-white/5 to-white/2 border border-white/10">
                                         <p className="text-sm font-bold text-white/80">
@@ -593,7 +576,6 @@ const RaiseComplaint = () => {
                                 )}
                             </div>
 
-                            {/* Submit Button */}
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
@@ -614,10 +596,8 @@ const RaiseComplaint = () => {
                         </form>
                     </div>
 
-                    {/* Sidebar - 4 columns */}
                     <div className="lg:col-span-4">
                         <div className="sticky top-28 space-y-6">
-                            {/* Protocol Card */}
                             <div className="group backdrop-blur-2xl bg-gradient-to-br from-white/8 to-white/3 border border-white/15 rounded-3xl p-7 transition-all duration-500 shadow-xl hover:border-white/30">
                                 <div className="flex items-start gap-4 mb-6">
                                     <div className="relative">
@@ -650,7 +630,6 @@ const RaiseComplaint = () => {
                                 </div>
                             </div>
 
-                            {/* Confidentiality Card */}
                             <div className="group backdrop-blur-2xl bg-gradient-to-br from-white/8 to-white/3 border border-white/15 rounded-3xl p-7 transition-all duration-500 shadow-xl hover:border-white/30">
                                 <div className="flex items-start gap-4 mb-6">
                                     <div className="relative">
@@ -673,7 +652,6 @@ const RaiseComplaint = () => {
                                 </div>
                             </div>
 
-                            {/* Contact Card */}
                             <div className="group backdrop-blur-2xl bg-gradient-to-br from-white/8 to-white/3 border border-white/15 rounded-3xl p-7 transition-all duration-500 shadow-xl hover:border-white/30">
                                 <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                                     <div className="p-2 bg-gradient-to-br from-blue-500/30 to-cyan-600/20 rounded-lg">

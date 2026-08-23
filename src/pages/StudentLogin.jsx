@@ -41,7 +41,6 @@ const mascotVariant = {
 function StudentLogin() {
   const navigate = useNavigate();
 
-  // Public folder se direct image path define kar diye hain taaki koi error na aaye
   const huskyNormal = "/husky-normal.png";
   const huskyCover = "/husky-cover.png";
 
