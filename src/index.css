@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-/* ============================================================
-   GLOBAL DESIGN TOKENS
-   One shared palette for the whole app. Every page pulls its
-   accent from here instead of inventing its own one-off hex.
-   ============================================================ */
 :root {
   --bg-deep: #030712;
   --bg-raised: #0b1224;
@@ -57,10 +52,6 @@
   }
 }
 
-/* ============================================================
-   SCROLL REVEAL (global utility — used across every page)
-   Subtle, fast, fires once via IntersectionObserver in JS.
-   ============================================================ */
 .reveal {
   opacity: 0;
   transform: translateY(16px);
@@ -71,9 +62,6 @@
   transform: translateY(0);
 }
 
-/* ============================================================
-   STABILITY / ANTI-FLICKER
-   ============================================================ */
 img,
 svg {
   max-width: 100%;

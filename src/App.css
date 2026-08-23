@@ -1,12 +1,3 @@
-/* ==========================================================================
-   T.B.G. POLYTECHNIC — SMART CAMPUS
-   Unified App Stylesheet
-   Tokens live in index.css (:root). This file organizes everything that
-   sits on top of them: shared glass/card system, navbar, and one section
-   per page. No page-specific CSS files — this is the single source.
-   ========================================================================== */
-
-/* Anti-Flicker & Smooth Rendering Fixes for Route Swaps */
 html {
   scroll-behavior: smooth;
 }
@@ -19,18 +10,12 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-/* Fix for white flash / flickering on page transitions */
 #root {
   min-height: 100vh;
   background-color: #020817;
   isolation: isolate;
 }
 
-/* ==========================================================================
-   GLASS SYSTEM (shared)
-   One definition of "glass" used everywhere — Navbar, cards, panels,
-   the login card. Keep it restrained: soft blur, thin border, quiet shadow.
-   ========================================================================== */
 .glass {
   background: var(--glass);
   border: 1px solid var(--border);
@@ -48,8 +33,6 @@ html, body {
   border-color: var(--border-hi);
 }
 
-/* Ambient background used by every full page: one slow radial glow,
-   never mouse-tracked, never flashing. */
 .ambient-bg {
   position: fixed;
   inset: 0;
@@ -60,9 +43,6 @@ html, body {
     radial-gradient(circle at 50% 100%, rgba(139, 92, 246, 0.08), transparent 50%);
 }
 
-/* ==========================================================================
-   SHARED CARD SYSTEM
-   ========================================================================== */
 .card {
   border-radius: var(--radius-md);
   padding: 24px;
@@ -73,7 +53,6 @@ html, body {
   box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55);
 }
 
-/* Shine sweep — used sparingly, only on primary CTAs and hero cards */
 .shine-wrap {
   position: relative;
   overflow: hidden;
@@ -94,7 +73,6 @@ html, body {
   left: 130%;
 }
 
-/* Buttons */
 .btn {
   --accent: var(--cyan);
   display: inline-flex;
@@ -129,22 +107,16 @@ html, body {
 .btn-amber { --accent: var(--amber); }
 .btn-emerald { --accent: var(--emerald); }
 
-/* ==========================================================================
-   NAVBAR
-   ========================================================================== */
 .navbar-shell {
   position: sticky;
   top: 0;
   z-index: 50;
-  padding: 16px;
+  padding: 6px 16px;
 }
 .navbar-shell .navbar-inner {
   border-radius: 999px;
 }
 
-/* ==========================================================================
-   HOME
-   ========================================================================== */
 .home-title {
   font-family: "Space Grotesk", "Inter", sans-serif;
   font-weight: 700;
@@ -155,11 +127,6 @@ html, body {
   color: transparent;
 }
 
-/* ==========================================================================
-   DASHBOARD
-   Per-year accent kept distinct on purpose (identity), driven by CSS vars
-   so hover/active states stay in one place.
-   ========================================================================== */
 .year-card {
   --dot: var(--cyan);
 }
@@ -172,9 +139,6 @@ html, body {
   box-shadow: 0 0 32px -14px color-mix(in srgb, var(--dot) 60%, transparent);
 }
 
-/* ==========================================================================
-   LIBRARY
-   ========================================================================== */
 .library-card {
   border-radius: var(--radius-md);
 }
@@ -182,19 +146,10 @@ html, body {
   border-color: color-mix(in srgb, var(--cyan) 55%, var(--border));
 }
 
-/* ==========================================================================
-   ABOUT
-   ========================================================================== */
 .about-avatar {
   background: linear-gradient(135deg, var(--cyan), var(--violet));
 }
 
-/* ==========================================================================
-   COLLEGE DETAILS
-   Folded in from the former CollegeDetails.css — same visual language,
-   scd-* namespace kept so the component markup didn't need to change.
-   Trimmed: fewer/softer orbs, shorter letter-stagger on the wordmark.
-   ========================================================================== */
 .scd-section {
   --scd-bg: var(--bg-deep);
   --scd-bg-raised: var(--bg-raised);
@@ -219,7 +174,7 @@ html, body {
   overflow: hidden;
   background: var(--scd-bg);
   color: var(--scd-text);
-  padding: 100px 6vw 110px;
+  padding: 40px 6vw 80px;
   font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
   box-sizing: border-box;
 }
@@ -666,10 +621,6 @@ html, body {
   }
 }
 
-/* ==========================================================================
-   PLACEMENT
-   Placeholder shell only — populate with real data when provided.
-   ========================================================================== */
 .placement-empty {
   border-radius: var(--radius-md);
   padding: 48px 24px;
@@ -677,16 +628,10 @@ html, body {
   color: var(--text-muted);
 }
 
-/* ==========================================================================
-   STUDENT LOGIN
-   ========================================================================== */
 .login-card {
   border-radius: var(--radius-lg);
 }
 
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
 @media (max-width: 1024px) {
   .card { padding: 20px; }
 }
